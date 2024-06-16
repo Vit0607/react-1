@@ -1,9 +1,9 @@
 import './Button.css';
 import { useState } from 'react';
 
-function Button({ text }) {
+function Button({ text, onClick }) {
     return (
-        <button on className="button accent">
+        <button on className="button accent" onClick={onClick}>
             {text}
         </button>
     );
