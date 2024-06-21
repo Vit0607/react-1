@@ -1,6 +1,7 @@
 import styles from './JournalForm.module.css';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import cn from 'classnames';
 
 function JournalForm({ onSubmit }) {
     const [formValidState, setFormValidState] = useState({
@@ -43,7 +44,11 @@ function JournalForm({ onSubmit }) {
             <input
                 type="text"
                 name="title"
-                className={`${styles['input']} ${formValidState.title ? '' : styles['invalid']}`}
+                className={cn(styles['input'], {
+                    [styles['invalid']]: !formValidState.title,
+                    [styles['invalid2']]: !formValidState.title,
+                    [styles['invalid3']]: !formValidState.title
+                })}
             />
             <input
                 type="date"
