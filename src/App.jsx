@@ -22,11 +22,17 @@ function App() {
         }
     }, []);
 
+    useEffect(() => {
+        if (items.length) {
+            localStorage.setItem('data', JSON.stringify(items));
+        }
+    }, [items]);
+
     const addItem = item => {
         setItems(oldItems => [
             ...oldItems,
             {
-                text: item.text,
+                post: item.post,
                 title: item.title,
                 date: new Date(item.date),
                 id:
