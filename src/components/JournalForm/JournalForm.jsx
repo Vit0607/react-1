@@ -24,14 +24,20 @@ function JournalForm({ onSubmit }) {
     useEffect(() => {
         if (isFormReadyToSubmit) {
             onSubmit(values);
+            dispatchForm({ type: 'CLEAR' });
         }
     }, [isFormReadyToSubmit]);
 
+    const onChange = e => {
+        dispatchForm({
+            type: 'SET_VALUE',
+            payload: { [e.target.name]: e.target.value }
+        });
+    };
+
     const addJournalItem = e => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        const formProps = Object.fromEntries(formData);
-        dispatchForm({ type: 'SUBMIT', payload: formProps });
+        dispatchForm({ type: 'SUBMIT' });
     };
 
     return (
@@ -39,6 +45,8 @@ function JournalForm({ onSubmit }) {
             <div>
                 <input
                     type="text"
+                    onChange={onChange}
+                    value={values.title}
                     name="title"
                     className={cn(styles['input-title'], {
                         [styles['invalid']]: !isValid.title
@@ -52,6 +60,8 @@ function JournalForm({ onSubmit }) {
                 </label>
                 <input
                     type="date"
+                    onChange={onChange}
+                    value={values.date}
                     name="date"
                     id="date"
                     className={cn(styles['input'], {
@@ -66,7 +76,9 @@ function JournalForm({ onSubmit }) {
                 </label>
                 <input
                     type="text"
+                    onChange={onChange}
                     id="tag"
+                    value={values.tag}
                     name="tag"
                     className={styles['input']}
                 />
@@ -75,6 +87,8 @@ function JournalForm({ onSubmit }) {
             <textarea
                 name="post"
                 id=""
+                onChange={onChange}
+                value={values.post}
                 cols="30"
                 rows="10"
                 className={cn(styles['input'], {
