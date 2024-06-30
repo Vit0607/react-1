@@ -1,17 +1,11 @@
-import styles from './Header.module.css';
-
-function Header() {
+function SelectUser({ changeUser }) {
     const changeUser = e => {
+        changeUser(e.target.value);
         console.log(e.target.value);
     };
 
     return (
         <>
-            <img
-                className={styles.logo}
-                src="/logo.svg"
-                alt="Логотип журнала"
-            />
             <select name="user" id="user" onChange={changeUser}>
                 <option value="1">Антон</option>
                 <option value="2">Вася</option>
@@ -20,4 +14,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default SelectUser;
